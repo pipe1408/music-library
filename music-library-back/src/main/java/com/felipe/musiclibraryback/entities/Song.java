@@ -15,17 +15,17 @@ public class Song {
     @Column(name = "ID", nullable = false)
     private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "DISK_ID", nullable = false)
-    private Disk disk;
+    @Column(name = "NAME", nullable = false)
+    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ARTIST_ID", nullable = false)
     private Artist artist;
 
-    @Column(name = "NAME", nullable = false)
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "DISK_ID", nullable = false)
+    private Disk disk;
 
 }

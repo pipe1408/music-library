@@ -16,21 +16,21 @@ public class Disk {
     @Column(name = "ID", nullable = false)
     private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "GROUP_ID", nullable = false)
-    private Group group;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ARTIST_ID", nullable = false)
-    private Artist artist;
-
     @Column(name = "PUBLISHED_YEAR", nullable = false)
     private Integer publishedYear;
 
     @ColumnDefault("0")
     @Column(name = "SIZE", nullable = false)
     private Integer size;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ARTIST_ID", nullable = false)
+    private Artist artist;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "GROUP_ID", nullable = false)
+    private com.felipe.musiclibraryback.entities.Group group;
 
 }
