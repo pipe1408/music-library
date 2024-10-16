@@ -48,4 +48,23 @@ public class GroupController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(group);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Group> putGroup(@PathVariable int id, @RequestBody @Valid GroupDTO groupDTO) {
+        Group group = groupService.updateGroup(id, groupDTO);
+
+        if (group == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        return ResponseEntity.ok(group);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteGroup(@PathVariable int id) {
+        boolean deleted = groupService.deleteGroup(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
 }
