@@ -23,17 +23,13 @@ jobs:
         distribution: 'temurin'
 
     - name: Set execute permission for Gradle Wrapper
-      run: chmod +x ./gradlew
-      working-directory: ./music-library-back/
+      run: chmod +x ./music-library-back/gradlew
 
-    # Setup Gradle
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582
 
-    # Build the project
     - name: Build with Gradle Wrapper
-      run: ./gradlew build
-      working-directory: ./music-library-back/
+      run: ./music-library-back/gradlew build
 
   dependency-submission:
 
@@ -50,6 +46,5 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
-    # Submit dependency graph
     - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582
+      run: ./music-library-back/gradlew dependencyUpdates --write-locks
