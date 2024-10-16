@@ -34,25 +34,4 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
       working-directory: ./music-library-back/
-
-  dependency-submission:
-
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-
-    - name: Set execute permission for Gradle Wrapper
-      run: chmod +x gradlew
-      working-directory: ./music-library-back/
-
-    - name: Generate and submit dependency graph
-      run: ./music-library-back/gradlew dependencyUpdates --write-locks
+      
