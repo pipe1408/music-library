@@ -1,4 +1,4 @@
-package com.felipe.musiclibrary.entities;
+package com.felipe.musiclibraryback.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

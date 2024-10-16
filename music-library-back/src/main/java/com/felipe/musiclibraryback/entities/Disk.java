@@ -1,4 +1,4 @@
-package com.felipe.musiclibrary.entities;
+package com.felipe.musiclibraryback.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class Disk {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "GROUP_ID", nullable = false)
-    private com.felipe.musiclibrary.entities.Group group;
+    private com.felipe.musiclibraryback.entities.Group group;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)

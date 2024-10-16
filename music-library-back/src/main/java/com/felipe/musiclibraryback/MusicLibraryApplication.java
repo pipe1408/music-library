@@ -1,4 +1,4 @@
-package com.felipe.musiclibrary;
+package com.felipe.musiclibraryback;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
