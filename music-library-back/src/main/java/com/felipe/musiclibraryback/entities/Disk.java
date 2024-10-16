@@ -31,6 +31,6 @@ public class Disk {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "GROUP_ID", nullable = false)
-    private com.felipe.musiclibraryback.entities.Group group;
+    private Group group;
 
 }
