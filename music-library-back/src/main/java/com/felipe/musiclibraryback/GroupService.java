@@ -16,8 +16,20 @@ public class GroupService {
         this.groupRepository = groupRepository;
     }
 
-    public List<Group> getAllGroups() {
-        return groupRepository.findAll();
+    public List<Group> getGroups(String name, String shortName) {
+        if (name != null && shortName != null) {
+            return groupRepository.findByNameAndShortName(name, shortName);
+        } else if (name != null) {
+            return groupRepository.findByName(name);
+        } else if (shortName != null) {
+            return groupRepository.findByShortName(shortName);
+        } else {
+            return groupRepository.findAll();
+        }
+    }
+
+    public Group getGroupById(int id) {
+        return groupRepository.findById(id).orElse(null);
     }
 
     public Group createGroup(@Valid GroupDTO groupDTO) {

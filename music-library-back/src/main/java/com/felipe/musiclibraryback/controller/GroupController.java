@@ -20,8 +20,24 @@ public class GroupController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Group>> getAllGroups() {
-        return ResponseEntity.ok(groupService.getAllGroups());
+    public ResponseEntity<List<Group>> getAllGroups(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String shortName
+    ) {
+        List<Group> groups = groupService.getGroups(name, shortName);
+        return ResponseEntity.ok(groups);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Group> getGroupById(@PathVariable int id) {
+        Group group = groupService.getGroupById(id);
+
+        if (group == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(group);
     }
 
     @PostMapping
