@@ -29,7 +29,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Change folder to gradle project
-      run: pwd
+      run: cd music-library/
 
     - name: Set execute permission for Gradle Wrapper
       run: chmod +x ./gradlew
