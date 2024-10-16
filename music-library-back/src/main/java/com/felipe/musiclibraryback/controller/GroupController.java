@@ -36,7 +36,6 @@ public class GroupController {
         if (group == null) {
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(group);
     }
 
