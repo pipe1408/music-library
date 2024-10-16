@@ -1,4 +1,4 @@
-package com.felipe.musiclibraryback;
+package com.felipe.musiclibraryback.service;
 
 import com.felipe.musiclibraryback.entities.Group;
 import com.felipe.musiclibraryback.entities.dto.GroupDTO;
@@ -33,6 +33,12 @@ public class GroupService {
     }
 
     public Group createGroup(@Valid GroupDTO groupDTO) {
+        List<Group> groupLookup = getGroups(groupDTO.name(), groupDTO.shortName());
+
+        if (!groupLookup.isEmpty()) {
+            return null;
+        }
+
         Group group = new Group();
         group.setName(groupDTO.name());
         group.setShortName(groupDTO.shortName());

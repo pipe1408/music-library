@@ -1,6 +1,6 @@
 package com.felipe.musiclibraryback.controller;
 
-import com.felipe.musiclibraryback.GroupService;
+import com.felipe.musiclibraryback.service.GroupService;
 import com.felipe.musiclibraryback.entities.Group;
 import com.felipe.musiclibraryback.entities.dto.GroupDTO;
 import jakarta.validation.Valid;
@@ -42,6 +42,10 @@ public class GroupController {
     @PostMapping
     public ResponseEntity<Group> postGroup(@RequestBody @Valid GroupDTO groupDTO) {
         Group group = groupService.createGroup(groupDTO);
+
+        if (group == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(group);
     }
 }
