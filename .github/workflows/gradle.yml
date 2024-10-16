@@ -50,5 +50,9 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
+    - name: Set execute permission for Gradle Wrapper
+      run: chmod +x gradlew
+      working-directory: ./music-library-back/
+
     - name: Generate and submit dependency graph
       run: ./music-library-back/gradlew dependencyUpdates --write-locks
