@@ -16,12 +16,12 @@ public class Group {
     private Integer id;
 
     @Lob
-    @Column(name = "SHORT_NAME", nullable = false)
-    private String shortName;
-
-    @Lob
     @Column(name = "NAME", nullable = false)
     private String name;
+
+    @Lob
+    @Column(name = "SHORT_NAME", nullable = false)
+    private String shortName;
 
     @ColumnDefault("0")
     @Column(name = "SIZE", nullable = false)
