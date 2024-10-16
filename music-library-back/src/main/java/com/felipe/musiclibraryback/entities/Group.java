@@ -15,11 +15,9 @@ public class Group {
     @Column(name = "ID", nullable = false)
     private Integer id;
 
-    @Lob
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Lob
     @Column(name = "SHORT_NAME", nullable = false)
     private String shortName;
 

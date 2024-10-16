@@ -14,7 +14,6 @@ public class Artist {
     @Column(name = "ID", nullable = false)
     private Integer id;
 
-    @Lob
     @Column(name = "NAME", nullable = false)
     private String name;
 

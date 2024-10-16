@@ -12,7 +12,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "SONGS")
 public class Song {
     @Id
-    @Lob
     @Column(name = "ID", nullable = false)
     private String id;
 
@@ -26,7 +25,6 @@ public class Song {
     @JoinColumn(name = "ARTIST_ID", nullable = false)
     private Artist artist;
 
-    @Lob
     @Column(name = "NAME", nullable = false)
     private String name;
 

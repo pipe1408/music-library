@@ -13,7 +13,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "DISKS")
 public class Disk {
     @Id
-    @Lob
     @Column(name = "ID", nullable = false)
     private String id;
 
