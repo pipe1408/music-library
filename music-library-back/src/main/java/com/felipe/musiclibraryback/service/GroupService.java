@@ -42,7 +42,9 @@ public class GroupService {
         List<Group> groupLookup = getGroups(groupDTO.name(), groupDTO.shortName());
 
         if (!groupLookup.isEmpty()) {
-            return null;
+            throw new HttpClientErrorException(
+                    HttpStatus.CONFLICT,
+                    "A group already with the given name or short name");
         }
         Group group = new Group();
         group.setName(groupDTO.name());
@@ -52,28 +54,21 @@ public class GroupService {
     }
 
     public Group updateGroup(Integer id, @Valid GroupDTO groupDTO) {
-        Group existingGroup = groupRepository.findById(id).orElse(null);
-        if (existingGroup == null) {
-            return null;
-        }
-
+        Group existingGroup = getGroupById(id);
         List<Group> groupLookup = getGroups(groupDTO.name(), groupDTO.shortName());
-        if (!groupLookup.isEmpty() && !groupLookup.getFirst().getId().equals(id)) {
-            return null;
-        }
 
+        if (!groupLookup.isEmpty() && !groupLookup.getFirst().getId().equals(id)) {
+            throw new HttpClientErrorException(
+                    HttpStatus.CONFLICT,
+                    "A group already with the given name or short name");
+        }
         existingGroup.setName(groupDTO.name());
         existingGroup.setShortName(groupDTO.shortName());
         return groupRepository.save(existingGroup);
     }
 
 
-    public boolean deleteGroup(Integer id) {
-        Group group = groupRepository.findById(id).orElse(null);
-        if (group != null) {
-            groupRepository.delete(group);
-            return true;
-        }
-        return false;
+    public void deleteGroup(Integer id) {
+        groupRepository.delete(getGroupById(id));
     }
 }

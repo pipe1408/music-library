@@ -9,14 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/groups")
 public class GroupController {
     private final GroupService groupService;
+    private final Logger logger;
 
     public GroupController(GroupService groupService) {
         this.groupService = groupService;
+        this.logger = Logger.getLogger(this.getClass().getName());
     }
 
     @GetMapping
@@ -24,47 +27,32 @@ public class GroupController {
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String shortName
     ) {
-        List<Group> groups = groupService.getGroups(name, shortName);
-        return ResponseEntity.ok(groups);
+        logger.info("Received request for getAllGroups");
+        return ResponseEntity.ok(groupService.getGroups(name, shortName));
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Group> getGroupById(@PathVariable int id) {
-        Group group = groupService.getGroupById(id);
-
-        if (group == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(group);
+        logger.info("Received request for getGroupById");
+        return ResponseEntity.ok(groupService.getGroupById(id));
     }
 
     @PostMapping
     public ResponseEntity<Group> postGroup(@RequestBody @Valid GroupDTO groupDTO) {
-        Group group = groupService.createGroup(groupDTO);
-
-        if (group == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(group);
+        logger.info("Received request for postGroup");
+        return ResponseEntity.status(HttpStatus.CREATED).body(groupService.createGroup(groupDTO));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Group> putGroup(@PathVariable int id, @RequestBody @Valid GroupDTO groupDTO) {
-        Group group = groupService.updateGroup(id, groupDTO);
-
-        if (group == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-        return ResponseEntity.ok(group);
+        logger.info("Received request for putGroup");
+        return ResponseEntity.ok(groupService.updateGroup(id, groupDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGroup(@PathVariable int id) {
-        boolean deleted = groupService.deleteGroup(id);
-        if (deleted) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        logger.info("Received request for deleteGroup");
+        groupService.deleteGroup(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
