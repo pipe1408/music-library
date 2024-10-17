@@ -42,20 +42,20 @@ tasks.named('test') {
 test {
 	finalizedBy jacocoTestReport
 }
+
 jacocoTestReport {
 	dependsOn test
 }
 
 jacoco {
 	toolVersion = "0.8.12"
-	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
 
 jacocoTestReport {
 	reports {
 		xml.required = false
 		csv.required = false
-		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+		html.required = true
 	}
 }
 
@@ -63,8 +63,11 @@ jacocoTestCoverageVerification {
 	violationRules {
 		rule {
 			limit {
+				counter = 'BRANCH'
 				minimum = 0.5
 			}
 		}
 	}
 }
+
+check.dependsOn jacocoTestCoverageVerification
